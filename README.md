@@ -1,29 +1,27 @@
-# 💕 LoveMatch AI - Indian Marriage Outcome Predictor
+ LoveMatch AI - Indian Marriage Outcome Predictor
 
 An intelligent machine learning platform that predicts Indian marriage outcomes using XGBoost, explainable AI (SHAP), and counterfactual recommendations (DiCE).
 
-**Live Demo:** [Streamlit Cloud Link - Deploy Here]
+
 
 ---
 
-## 🎯 Overview
-
 LoveMatch AI analyzes 10,000+ Indian marriage records across 17 features to predict:
 
-1. **💕 Marriage Type** - Is it a Love or Arranged marriage?
-2. **✨ Marriage Success** - What's the divorce risk and satisfaction level?
-3. **🎯 Improvement Path** - How to increase success probability?
+1.  Marriage Type- Is it a Love or Arranged marriage?
+2. Marriage Success- What's the divorce risk and satisfaction level?
+3. Improvement Path - How to increase success probability?
 
 All predictions come with **SHAP-based explainability** so you understand WHY the model predicts what it does.
 
 ### Key Features
 
-- ✅ **Probabilistic Predictions** - Get confidence scores (0-100%)
-- ✅ **SHAP Explainability** - Waterfall charts showing feature contributions
-- ✅ **Counterfactual Recommendations** - Get actionable "what-if" suggestions
-- ✅ **Interactive Visualizations** - Gauge charts, bar plots, comparison tables
-- ✅ **Zero Data Storage** - Privacy-first, no personal data saved
-- ✅ **Free Deployment** - Streamlit Community Cloud hosting
+-  **Probabilistic Predictions** - Get confidence scores (0-100%)
+-  **SHAP Explainability** - Waterfall charts showing feature contributions
+-  **Counterfactual Recommendations** - Get actionable "what-if" suggestions
+-  **Interactive Visualizations** - Gauge charts, bar plots, comparison tables
+-  **Zero Data Storage** - Privacy-first, no personal data saved
+-  **Free Deployment** - Streamlit Community Cloud hosting
 
 ---
 
@@ -532,7 +530,7 @@ If you found this project helpful, please:
 
 ---
 
-**Made with ❤️ by [Your Name]**
+**Made  by Utsav Vatshalya**
 
 *"Understanding relationships through data science and explainable AI"*
 
