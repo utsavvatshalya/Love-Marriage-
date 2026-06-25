@@ -127,10 +127,30 @@ try:
     divorce_feature_cols = safe_feature_load('divorce_feature_cols.pkl', 'Divorce Feature Columns')
     
     # Satisfaction prediction models
-    satisfaction_model = safe_model_load('satisfaction_model.pkl', 'Satisfaction Model')
-    sat_preprocessor = safe_preprocessor_load('sat_preprocessor.pkl', 'Satisfaction Preprocessor')
-    sat_feature_names = safe_feature_load('sat_feature_names.pkl', 'Satisfaction Feature Names')
-    sat_label_encoder = safe_label_encoder_load('sat_label_encoder.pkl', 'Satisfaction Label Encoder')
+    satisfaction_model = safe_model_load(
+        'satisfaction_model.pkl',
+        'Satisfaction Model'
+    )
+
+    sat_preprocessor = safe_preprocessor_load(
+        'sat_preprocessor.pkl',
+        'Satisfaction Preprocessor'
+    )
+
+    sat_feature_names = safe_feature_load(
+        'sat_feature_names.pkl',
+        'Satisfaction Feature Names'
+    )
+
+    sat_feature_cols = safe_feature_load(
+        'sat_feature_cols.pkl',
+        'Satisfaction Feature Columns'
+    )
+
+    sat_label_encoder = safe_label_encoder_load(
+        'sat_label_encoder.pkl',
+        'Satisfaction Label Encoder'
+    )
     
 except Exception as e:
     st.error(f"❌ Error loading models: {str(e)}")
@@ -163,17 +183,32 @@ with col2:
     if submit_button:
         try:
             # Validate input
-            if not all(user_input.values()):
+            if any(v is None for v in user_input.values()):
                 st.error("⚠️ Please fill in all fields!")
                 st.stop()
-            
-            # Preprocess for divorce model
-            input_df = create_input_dataframe(user_input, divorce_feature_cols)
-            X_divorce = divorce_preprocessor.transform(input_df)
-            
-            # Preprocess for satisfaction model
-            X_satisfaction = sat_preprocessor.transform(input_df)
-            
+
+
+            # Build separate inputs
+            input_divorce = create_input_dataframe(
+                user_input,
+                divorce_feature_cols
+            )
+
+            input_sat = create_input_dataframe(
+                user_input,
+                sat_feature_cols
+            )
+
+
+            # Preprocess
+            X_divorce = divorce_preprocessor.transform(
+                input_divorce
+            )
+
+            X_satisfaction = sat_preprocessor.transform(
+                input_sat
+            )
+                
             # Make predictions
             divorce_proba = divorce_model.predict_proba(X_divorce)
             divorce_prob = divorce_proba[0][1]  # Probability of divorce
