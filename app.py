@@ -1,197 +1,241 @@
 """
-LoveMatch AI - Couples Compatibility Analyzer
-Two people, one future. Discover if you're relationship-ready.
+LoveMatch AI — Home Page
 """
 
 import streamlit as st
+from pathlib import Path
+import sys
 
-# Page configuration
+sys.path.insert(0, str(Path(__file__).parent))
+from src.theme import inject_theme, ornamental_divider
+
 st.set_page_config(
-    page_title="LoveMatch AI - Couples Compatibility",
-    page_icon="💕",
+    page_title="LoveMatch AI — Indian Marriage Outcome Predictor",
+    page_icon="💍",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
-st.markdown("""
-<style>
-    :root {
-        --primary: #FF6B6B;
-        --primary-dark: #EE5A52;
-        --secondary: #2C3E50;
-        --accent: #FF8E8E;
-        --success: #27AE60;
-        --warning: #F39C12;
-        --light-bg: #F8F9FA;
-    }
-    
-    body {
-        background: linear-gradient(135deg, #F8F9FA 0%, #E8EAED 100%);
-    }
-    
-    .hero-section {
-        background: linear-gradient(135deg, #FF6B6B 0%, #EE5A52 50%, #2C3E50 100%);
-        padding: 80px 40px;
-        border-radius: 20px;
-        color: white;
-        text-align: center;
-        margin-bottom: 50px;
-        box-shadow: 0 10px 30px rgba(255, 107, 107, 0.2);
-    }
-    
-    .hero-section h1 {
-        font-size: 3.5em;
-        margin-bottom: 15px;
-        font-weight: 800;
-    }
-    
-    .module-card {
-        background: white;
-        padding: 35px;
-        border-radius: 15px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        border-top: 5px solid #FF6B6B;
-        transition: all 0.3s ease;
-    }
-    
-    .module-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 40px rgba(255, 107, 107, 0.15);
-    }
-    
-    .module-card h3 {
-        color: #FF6B6B;
-        margin-top: 0;
-    }
-    
-    .stats-box {
-        background: white;
-        padding: 30px;
-        border-radius: 12px;
-        text-align: center;
-        box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-        border-bottom: 4px solid #FF6B6B;
-    }
-    
-    .stats-number {
-        font-size: 2.5em;
-        font-weight: 800;
-        color: #FF6B6B;
-        margin: 15px 0;
-    }
-</style>
-""", unsafe_allow_html=True)
+inject_theme()
 
-# Hero Section
+# ── Hero — all text explicitly white via inline styles ────────────────────────
 st.markdown("""
-<div class="hero-section">
-    <h1>💕 LoveMatch AI</h1>
-    <p style="font-size: 1.3em; margin: 15px 0;">Two hearts, one future</p>
-    <p style="font-size: 1.1em; opacity: 0.95;">
-    Discover your compatibility and make informed decisions about your relationship
-    </p>
+<div style="
+  background: linear-gradient(135deg, #C9446A 0%, #7B2D42 100%);
+  border-radius: 20px;
+  text-align: center;
+  padding: 64px 40px 56px;
+  margin-bottom: 8px;
+  box-shadow: 0 8px 28px rgba(201,68,106,0.28);
+  position: relative;
+  overflow: hidden;
+">
+  <div style="position:absolute; font-size:200px; opacity:0.05; top:-40px; right:-20px; line-height:1;">💍</div>
+
+  <div style="font-size: 3em; margin-bottom: 12px; color: white;">💍</div>
+
+  <div style="
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.4em;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    color: white;
+  ">LoveMatch AI</div>
+
+  <div style="
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1em;
+    color: rgba(255,255,255,0.90);
+    max-width: 560px;
+    margin: 0 auto 28px;
+    line-height: 1.7;
+  ">
+    Machine learning meets matrimony. Predict marriage outcomes,
+    understand what drives them, and discover what changes would
+    make the biggest difference.
+  </div>
+
+  <div style="
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82em;
+    color: rgba(255,255,255,0.80);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+  ">
+    <span style="color:rgba(255,255,255,0.80);">📊 10,000 Records</span>
+    <span style="color:rgba(255,255,255,0.80);">🤖 XGBoost Models</span>
+    <span style="color:rgba(255,255,255,0.80);">🔍 SHAP Explainability</span>
+    <span style="color:rgba(255,255,255,0.80);">🎯 Counterfactual AI</span>
+  </div>
 </div>
 """, unsafe_allow_html=True)
 
-st.divider()
+ornamental_divider()
 
-# Main heading
-st.markdown("## 🚀 How It Works")
-st.markdown("**Step 1 → Step 2 → Step 3 → Decision**")
-
-col1, col2, col3, col4 = st.columns(4, gap="large")
-
-with col1:
-    st.markdown("""
-    <div class="module-card">
-        <h3>👨 Boy's Profile</h3>
-        <p style="color: #666; line-height: 1.6;">
-        Enter your background, lifestyle, and relationship goals in detail.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-    if st.button("📝 Start", key="boy", use_container_width=True):
-        st.switch_page("pages/1_Boy_Profile.py")
-
-with col2:
-    st.markdown("""
-    <div class="module-card">
-        <h3>👩 Girl's Profile</h3>
-        <p style="color: #666; line-height: 1.6;">
-        Share your information, preferences, and what you're looking for.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-    if st.button("📝 Start", key="girl", use_container_width=True):
-        st.switch_page("pages/2_Girl_Profile.py")
-
-with col3:
-    st.markdown("""
-    <div class="module-card">
-        <h3>💫 Compare Profiles</h3>
-        <p style="color: #666; line-height: 1.6;">
-        See visual comparison of both profiles side-by-side.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-    if st.button("📊 Analyze", key="compare", use_container_width=True):
-        st.switch_page("pages/3_Compatibility_Analysis.py")
-
-with col4:
-    st.markdown("""
-    <div class="module-card">
-        <h3>🎯 Get Recommendation</h3>
-        <p style="color: #666; line-height: 1.6;">
-        Marriage-ready or Keep Casual? Data-driven advice.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-    if st.button("💡 Advice", key="advice", use_container_width=True):
-        st.switch_page("pages/3_Compatibility_Analysis.py")
-
-st.divider()
-
-# Info section
-st.markdown("### ℹ️ What We Analyze")
-
-col1, col2 = st.columns(2)
-
-with col1:
-    st.markdown("""
-    **Personal Profile:**
-    - Age, Education, Income Level
-    - Caste, Religion, Location Preference
-    
-    **Lifestyle:**
-    - Urban/Rural preference
-    - Work status & career ambitions
-    - Family values
-    """)
-
-with col2:
-    st.markdown("""
-    **Compatibility Factors:**
-    - Age & life stage alignment
-    - Educational/income match
-    - Religious & caste compatibility
-    - Family approval likelihood
-    """)
-
-st.divider()
-
-st.markdown("### 📝 Privacy & Security")
+# ── Module cards ──────────────────────────────────────────────────────────────
 st.markdown("""
-✅ **Your data is private.** No information is stored or shared.  
-✅ **Instant analysis.** Results generated in real-time.  
-✅ **No registration.** Use anonymously.  
-✅ **Fair & unbiased.** ML models trained on diverse data.  
-""")
+<h2 style="text-align:center; font-family:'Cormorant Garamond',serif;
+           color:#7B2D42; font-size:2em; margin-bottom:6px;">
+  Three Modules. One Story.
+</h2>
+<p style="text-align:center; color:#999; font-size:0.95em; margin-bottom:28px;
+          font-family:'DM Sans',sans-serif;">
+  Each module tackles a different question about your marriage profile.
+</p>
+""", unsafe_allow_html=True)
 
-st.divider()
+c1, c2, c3 = st.columns(3, gap="medium")
+
+with c1:
+    st.markdown("""
+    <div class="lm-card" style="text-align:center; padding:32px 24px;">
+      <div style="font-size:2.4em; margin-bottom:12px;">💕</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-size:1.5em;
+                  font-weight:700; color:#7B2D42; margin-bottom:8px;">Love or Arranged?</div>
+      <div style="font-size:0.88em; color:#666; line-height:1.7; margin-bottom:20px;
+                  font-family:'DM Sans',sans-serif;">
+        Enter your profile and find out whether your relationship reads more like a love story
+        or an arranged match — with SHAP showing exactly why.
+      </div>
+      <span class="lm-badge lm-badge-red">Module 1</span>
+    </div>
+    """, unsafe_allow_html=True)
+    st.page_link("pages/1_Love_Marriage_Predictor.py", label="→ Open Love Predictor", use_container_width=True)
+
+with c2:
+    st.markdown("""
+    <div class="lm-card" style="text-align:center; padding:32px 24px;">
+      <div style="font-size:2.4em; margin-bottom:12px;">✨</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-size:1.5em;
+                  font-weight:700; color:#7B2D42; margin-bottom:8px;">Will It Last?</div>
+      <div style="font-size:0.88em; color:#666; line-height:1.7; margin-bottom:20px;
+                  font-family:'DM Sans',sans-serif;">
+        Get a clear read on divorce risk, predicted marital satisfaction, and the factors
+        driving both — visualised with feature importance charts.
+      </div>
+      <span class="lm-badge lm-badge-red">Module 2</span>
+    </div>
+    """, unsafe_allow_html=True)
+    st.page_link("pages/2_Marriage_Success_Predictor.py", label="→ Open Success Predictor", use_container_width=True)
+
+with c3:
+    st.markdown("""
+    <div class="lm-card" style="text-align:center; padding:32px 24px;">
+      <div style="font-size:2.4em; margin-bottom:12px;">🎯</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-size:1.5em;
+                  font-weight:700; color:#7B2D42; margin-bottom:8px;">What Can Change?</div>
+      <div style="font-size:0.88em; color:#666; line-height:1.7; margin-bottom:20px;
+                  font-family:'DM Sans',sans-serif;">
+        Counterfactual AI shows you which specific changes — parental approval, income,
+        education — would lift your success probability, and by exactly how much.
+      </div>
+      <span class="lm-badge lm-badge-red">Module 3</span>
+    </div>
+    """, unsafe_allow_html=True)
+    st.page_link("pages/3_Improve_My_Chances.py", label="→ Open Improvement Engine", use_container_width=True)
+
+ornamental_divider()
+
+# ── Compatibility flow ────────────────────────────────────────────────────────
+st.markdown("""
+<h2 style="text-align:center; font-family:'Cormorant Garamond',serif;
+           color:#7B2D42; font-size:2em; margin-bottom:6px;">
+  Or Try the Couple's Flow 💑
+</h2>
+<p style="text-align:center; color:#999; font-size:0.95em; margin-bottom:28px;
+          font-family:'DM Sans',sans-serif;">
+  Both partners fill in their profiles — and we give you a detailed compatibility breakdown.
+</p>
+""", unsafe_allow_html=True)
+
+fl1, fl2, fl3 = st.columns(3, gap="medium")
+
+with fl1:
+    st.markdown("""
+    <div class="lm-card" style="text-align:center; padding:24px 20px;">
+      <div style="font-size:2em; margin-bottom:8px;">👨</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-weight:700;
+                  color:#7B2D42; font-size:1.2em; margin-bottom:6px;">His Profile</div>
+      <div style="font-size:0.84em; color:#888; font-family:'DM Sans',sans-serif;">
+        Age, education, income, values & preferences
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+    st.page_link("pages/1_Boy_Profile.py", label="→ Start Here", use_container_width=True)
+
+with fl2:
+    st.markdown("""
+    <div class="lm-card" style="text-align:center; padding:24px 20px;">
+      <div style="font-size:2em; margin-bottom:8px;">👩</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-weight:700;
+                  color:#7B2D42; font-size:1.2em; margin-bottom:6px;">Her Profile</div>
+      <div style="font-size:0.84em; color:#888; font-family:'DM Sans',sans-serif;">
+        Same details from her perspective
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+    st.page_link("pages/2_Girl_Profile.py", label="→ Step 2", use_container_width=True)
+
+with fl3:
+    st.markdown("""
+    <div class="lm-card" style="text-align:center; padding:24px 20px;">
+      <div style="font-size:2em; margin-bottom:8px;">💫</div>
+      <div style="font-family:'Cormorant Garamond',serif; font-weight:700;
+                  color:#7B2D42; font-size:1.2em; margin-bottom:6px;">Your Score</div>
+      <div style="font-size:0.84em; color:#888; font-family:'DM Sans',sans-serif;">
+        Compatibility score + radar chart + recommendation
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+    st.page_link("pages/3_Compatibility_Analysis.py", label="→ See Results", use_container_width=True)
+
+ornamental_divider()
+
+# ── How it works ──────────────────────────────────────────────────────────────
+st.markdown("""
+<h2 style="text-align:center; font-family:'Cormorant Garamond',serif;
+           color:#7B2D42; font-size:2em; margin-bottom:28px;">
+  How It Works
+</h2>
+""", unsafe_allow_html=True)
+
+h1, h2, h3, h4 = st.columns(4, gap="medium")
+steps = [
+    ("1", "Fill Your Profile", "Answer questions about demographics, family background, and relationship preferences."),
+    ("2", "ML Model Predicts", "XGBoost classifiers trained on 10,000 real Indian marriage records process your inputs."),
+    ("3", "SHAP Explains Why", "See exactly which features pushed the prediction in each direction, and how strongly."),
+    ("4", "Act on Insights", "Counterfactual suggestions show the specific changes with the highest improvement potential."),
+]
+for col, (num, title, desc) in zip([h1, h2, h3, h4], steps):
+    with col:
+        st.markdown(f"""
+        <div class="lm-card" style="text-align:center; padding:24px 18px;">
+          <div style="width:40px; height:40px; border-radius:50%;
+                      background:linear-gradient(135deg,#C9446A,#7B2D42);
+                      color:white; font-weight:700; font-size:1.1em;
+                      display:flex; align-items:center; justify-content:center;
+                      margin:0 auto 12px; font-family:'DM Sans',sans-serif;">{num}</div>
+          <div style="font-weight:600; color:#2E2E2E; margin-bottom:8px; font-size:0.95em;
+                      font-family:'DM Sans',sans-serif;">{title}</div>
+          <div style="font-size:0.82em; color:#888; line-height:1.6;
+                      font-family:'DM Sans',sans-serif;">{desc}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+ornamental_divider()
 
 st.markdown("""
-<div style="text-align: center; color: #888; font-size: 0.9em; margin-top: 40px;">
-<p>💕 LoveMatch AI | Making relationship decisions easier</p>
+<div style="text-align:center; color:#bbb; font-size:0.82em; line-height:2; padding-bottom:12px;
+            font-family:'DM Sans',sans-serif;">
+  <strong style="color:#C9446A; font-family:'Cormorant Garamond',serif; font-size:1.15em;">
+    LoveMatch AI
+  </strong><br>
+  Built with Python · XGBoost · SHAP · Streamlit &nbsp;·&nbsp; For educational purposes only<br>
+  <em>Real relationships are built on communication, trust, and genuine effort — not just algorithms.</em>
 </div>
 """, unsafe_allow_html=True)
